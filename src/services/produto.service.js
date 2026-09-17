@@ -1,6 +1,8 @@
+const Produto = require("../models/produto.model");
+
 const produtos = [
-    { id: 1, nome: "Notebook", preco: 3500 },
-    { id: 2, nome: "Mouse", preco: 120 }
+    new Produto(1, "Notebook", 3500),
+    new Produto(2, "Mouse", 120)
 ];
 
 // Listar produtos
@@ -16,7 +18,9 @@ function listar(nome) {
 
 // Buscar produto pelo ID
 function buscarPorId(id) {
-    return produtos.find(produto => produto.id === Number(id));
+    return produtos.find(
+        produto => produto.id === Number(id)
+    );
 }
 
 // Criar produto
@@ -25,13 +29,15 @@ function criar(dados) {
         throw new Error("Nome e preço são obrigatórios");
     }
 
-    const produto = {
-        id: produtos.length > 0
-            ? Math.max(...produtos.map(p => p.id)) + 1
-            : 1,
-        nome: dados.nome,
-        preco: dados.preco
-    };
+    const id = produtos.length > 0
+        ? Math.max(...produtos.map(p => p.id)) + 1
+        : 1;
+
+    const produto = new Produto(
+        id,
+        dados.nome,
+        dados.preco
+    );
 
     produtos.push(produto);
 
@@ -52,11 +58,11 @@ function atualizar(id, dados) {
         throw new Error("Nome e preço são obrigatórios");
     }
 
-    produtos[indice] = {
-        id: Number(id),
-        nome: dados.nome,
-        preco: dados.preco
-    };
+    produtos[indice] = new Produto(
+        Number(id),
+        dados.nome,
+        dados.preco
+    );
 
     return produtos[indice];
 }
