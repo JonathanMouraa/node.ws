@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "tsx watch src/app.ts",
+    "build":"tsc",
+    "start": "node dist/app.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,11 @@
   },
   "homepage": "https://github.com/JonathanMouraa/node.ws#readme",
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.1",
+    "nodemon": "^3.1.14",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
   },
   "dependencies": {
     "express": "^5.2.1"
