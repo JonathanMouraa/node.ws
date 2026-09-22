@@ -1,4 +1,4 @@
-import { Produto } from "../models/produto.model";
+import { Produto } from "../model.js/produto.model";
 import { ProdutoRepository } from "./produto.repository";
 
 export class ProdutoRepositorySequelize implements ProdutoRepository {

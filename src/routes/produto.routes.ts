@@ -1,6 +1,8 @@
-import {Router} from "express";
-import * as produtoController
-   from "../controllers/produto.controller" ;
+import { Router } from "express";
+import * as produtoController 
+from "../controllers/produto.controllers";
+
+const router = Router();
 
 // GET /produtos
 router.get("/", produtoController.listar);
@@ -11,4 +13,4 @@ router.get("/:id", produtoController.buscarPorId);
 // POST /produtos
 router.post("/", produtoController.criar);
 
-exports default router;
+export default router;

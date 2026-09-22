@@ -1,12 +1,12 @@
-const Produto = require("../models/produto.model");
+import { Produto } from "../model.js/produto.model";
 
-const produtos = [
+const produtos: Produto[] = [
     new Produto(1, "Notebook", 3500),
     new Produto(2, "Mouse", 120)
 ];
 
 // Listar produtos
-function listar(nome) {
+function listar(nome?: string) {
     if (nome) {
         return produtos.filter(produto =>
             produto.nome.toLowerCase().includes(nome.toLowerCase())
@@ -17,14 +17,14 @@ function listar(nome) {
 }
 
 // Buscar produto pelo ID
-function buscarPorId(id) {
+function buscarPorId(id: number) {
     return produtos.find(
         produto => produto.id === Number(id)
     );
 }
 
 // Criar produto
-function criar(dados) {
+function criar(dados: { nome: string; preco: number }) {
     if (!dados.nome || dados.preco == null) {
         throw new Error("Nome e preço são obrigatórios");
     }
@@ -45,7 +45,7 @@ function criar(dados) {
 }
 
 // Atualizar produto inteiro - PUT
-function atualizar(id, dados) {
+function atualizar(id: number, dados: { nome: string; preco: number }) {
     const indice = produtos.findIndex(
         produto => produto.id === Number(id)
     );
@@ -68,7 +68,10 @@ function atualizar(id, dados) {
 }
 
 // Atualizar parcialmente - PATCH
-function atualizarParcial(id, dados) {
+function atualizarParcial(
+    id: number,
+    dados: { nome?: string; preco?: number }
+) {
     const produto = buscarPorId(id);
 
     if (!produto) {
@@ -87,7 +90,7 @@ function atualizarParcial(id, dados) {
 }
 
 // Excluir produto
-function excluir(id) {
+function excluir(id: number) {
     const indice = produtos.findIndex(
         produto => produto.id === Number(id)
     );
@@ -101,7 +104,7 @@ function excluir(id) {
     return true;
 }
 
-module.exports = {
+export {
     listar,
     buscarPorId,
     criar,
