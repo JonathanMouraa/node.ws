@@ -1,15 +1,27 @@
-const service = require("../services/produto.service");
+import { Request, Response } from "express";
+import { ProdutoRepositoryMemory } from "../repositories/produto.repository.memory";
+import { ProdutoService } from "../services/produto.service";
+
+const repository = new ProdutoRepositoryMemory();
+const service = new ProdutoService(repository);
 
 // GET /produtos
-exports.listar = (req, res) => {
-    const produtos = service.listar(req.query.nome);
+export async function listar(req: Request, res: Response) {
+    const produtos = await service.listar(
+        req.query.nome as string | undefined
+    );
 
     res.status(200).json(produtos);
-};
+}
 
 // GET /produtos/:id
-exports.buscarPorId = (req, res) => {
-    const produto = service.buscarPorId(req.params.id);
+export async function buscarPorId(
+    req: Request,
+    res: Response
+) {
+    const produto = await service.buscarPorId(
+        Number(req.params.id)
+    );
 
     if (!produto) {
         return res.status(404).json({
@@ -18,26 +30,32 @@ exports.buscarPorId = (req, res) => {
     }
 
     res.status(200).json(produto);
-};
+}
 
 // POST /produtos
-exports.criar = (req, res) => {
+export async function criar(
+    req: Request,
+    res: Response
+) {
     try {
-        const produto = service.criar(req.body);
+        const produto = await service.criar(req.body);
 
         res.status(201).json(produto);
     } catch (error) {
         res.status(400).json({
-            mensagem: error.message
+            mensagem: (error as Error).message
         });
     }
-};
+}
 
 // PUT /produtos/:id
-exports.atualizar = (req, res) => {
+export async function atualizar(
+    req: Request,
+    res: Response
+) {
     try {
-        const produto = service.atualizar(
-            req.params.id,
+        const produto = await service.atualizar(
+            Number(req.params.id),
             req.body
         );
 
@@ -50,15 +68,18 @@ exports.atualizar = (req, res) => {
         res.status(200).json(produto);
     } catch (error) {
         res.status(400).json({
-            mensagem: error.message
+            mensagem: (error as Error).message
         });
     }
-};
+}
 
 // PATCH /produtos/:id
-exports.atualizarParcial = (req, res) => {
-    const produto = service.atualizarParcial(
-        req.params.id,
+export async function atualizarParcial(
+    req: Request,
+    res: Response
+) {
+    const produto = await service.atualizarParcial(
+        Number(req.params.id),
         req.body
     );
 
@@ -69,11 +90,16 @@ exports.atualizarParcial = (req, res) => {
     }
 
     res.status(200).json(produto);
-};
+}
 
 // DELETE /produtos/:id
-exports.excluir = (req, res) => {
-    const excluido = service.excluir(req.params.id);
+export async function excluir(
+    req: Request,
+    res: Response
+) {
+    const excluido = await service.excluir(
+        Number(req.params.id)
+    );
 
     if (!excluido) {
         return res.status(404).json({
@@ -82,4 +108,4 @@ exports.excluir = (req, res) => {
     }
 
     res.status(204).send();
-};
+}
