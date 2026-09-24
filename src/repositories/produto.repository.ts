@@ -1,4 +1,4 @@
-import { Produto } from "../model.js/produto.model";
+import { Produto } from "../model/produto.model";
 
 export interface ProdutoRepository {
     listar(nome?: string): Promise<Produto[]>;

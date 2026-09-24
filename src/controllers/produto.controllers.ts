@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { ProdutoRepositoryMemory } from "../repositories/produto.repository.memory";
+import { ProdutoRepositorySequelize } from "../repositories/produto.repository.sequelize";
 import { ProdutoService } from "../services/produto.service";
 
-const repository = new ProdutoRepositoryMemory();
+const repository = new ProdutoRepositorySequelize();
 const service = new ProdutoService(repository);
 
 // GET /produtos

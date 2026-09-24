@@ -1,4 +1,4 @@
-import { Produto } from "../model.js/produto.model";
+import { Produto } from "../model/produto.model";
 import { ProdutoRepository } from "../repositories/produto.repository";
 
 export class ProdutoService {
