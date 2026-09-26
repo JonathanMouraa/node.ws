@@ -22,8 +22,14 @@
   },
   "homepage": "https://github.com/JonathanMouraa/node.ws#readme",
   "devDependencies": {
+    "@babel/core": "^8.0.6",
+    "@babel/preset-env": "^8.0.6",
+    "@babel/preset-typescript": "^8.0.1",
     "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
     "@types/node": "^26.6.1",
+    "babel-jest": "^30.5.2",
+    "jest": "^30.5.2",
     "nodemon": "^3.1.14",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
